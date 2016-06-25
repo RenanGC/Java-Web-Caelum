@@ -12,7 +12,6 @@
 <body>
 <c:import url="cabecalho.jsp"/>
 	<!-- cria DAO -->
-	<jsp:useBean id="dao" class= "br.com.caelum.agenda.dao.ContatoDao"/>
 	
 	<table border="3">
 		<thead>
@@ -24,7 +23,7 @@
 			</tr>
 		</thead>
 		<!-- percorre toda a lista de contatos-->
-		<c:forEach var="contato" items="${dao.lista}" varStatus="id">
+		<c:forEach var="contato" items="${contatos}" varStatus="id">
 			<tr bgcolor="#${id.count %2 ==0? '#00FF00' : '#F0FFFF'}"}>
 			
 			
@@ -36,10 +35,15 @@
 						<c:if test="${empty contato.email}">
 							E-mail não informado
 						</c:if>
-					</td>				
+					</td>	
+								
 				<td>${contato.endereco}</td>
 				<td> <fmt:formatDate value="${contato.dataNascimento.time}"
 					pattern= "dd/MM/yyyy"/>
+					</td>
+					
+					<td>
+						<a href="mvc?logica=RemoveContatoLogic&id=${contato.id}">Remover</a>
 					</td>
 			</tr>
 		</c:forEach>
